@@ -206,6 +206,29 @@ document.getElementById('modal').style.display='none';
 </section>
 
 <script>
+  async function entrarConta() {
+  const modal = document.getElementById("modal");
+  const campos = modal.querySelectorAll("input");
+
+  const email = campos[0].value.trim();
+  const senha = campos[1].value;
+  const mensagem = document.getElementById("descricao");
+
+  mensagem.textContent = "Verificando seus dados...";
+
+  try {
+    const { error } = await supabaseClient.auth.signInWithPassword({
+      email,
+      password: senha
+    });
+
+    if (error) throw error;
+
+    mensagem.textContent = "Login realizado com sucesso!";
+  } catch (error) {
+    mensagem.textContent = "Erro ao entrar: " + error.message;
+  }
+}
 document.getElementById("formCadastro").addEventListener("submit", async function(e) {
   e.preventDefault();
 
