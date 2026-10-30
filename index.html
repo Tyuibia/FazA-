@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FazAí | Encontre profissionais</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f5f7fb;color:#17243b}
+header{background:#123b82;color:white;padding:20px}
+nav{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{font-size:27px;font-weight:bold}
+.logo span{color:#ffd43b}
+nav a{color:white;text-decoration:none;margin:7px;font-size:14px}
+.hero{background:linear-gradient(120deg,#123b82,#1762c4);color:white;text-align:center;padding:65px 20px}
+.hero h1{font-size:36px;margin-bottom:15px}
+.hero p{font-size:17px;margin-bottom:25px}
+.search{max-width:550px;margin:auto;display:flex;background:white;border-radius:10px;padding:6px}
+.search input{flex:1;min-width:0;border:0;padding:12px;outline:none;font-size:15px}
+button{background:#ffd43b;color:#18335f;border:0;padding:13px 19px;border-radius:8px;font-weight:bold;cursor:pointer}
+section{max-width:1100px;margin:40px auto;padding:0 18px}
+h2{margin-bottom:20px;font-size:25px}
+.categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:12px}
+.category{background:white;padding:20px 10px;text-align:center;border-radius:12px;box-shadow:0 3px 12px #0000000b;font-weight:bold}
+.category span{display:block;font-size:28px;margin-bottom:10px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:white;padding:20px;border-radius:13px;box-shadow:0 3px 12px #0000000b}
+.avatar{width:55px;height:55px;border-radius:50%;background:#e7efff;display:grid;place-items:center;font-size:25px;margin-bottom:12px}
+.card h3{margin-bottom:7px}
+.card p{color:#65718a;font-size:14px;margin:7px 0}
+.card button{margin-top:12px;width:100%}
+.actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.action{background:white;border-radius:13px;padding:25px;text-align:center}
+.action p{color:#65718a;margin:12px 0}
+footer{background:#123b82;color:white;text-align:center;padding:25px;margin-top:50px}
+.modal{display:none;position:fixed;inset:0;background:#0009;align-items:center;justify-content:center;padding:18px}
+.modal-box{background:white;padding:25px;border-radius:14px;width:100%;max-width:380px}
+.modal-box input{width:100%;padding:12px;margin:8px 0;border:1px solid #ccd3df;border-radius:7px}
+.modal-box button{width:100%;margin-top:10px}
+.close{background:#e8edf5;margin-top:8px}
+@media(max-width:500px){.hero h1{font-size:29px}nav{justify-content:center}.search{flex-direction:column;gap:5px}}
+</style>
+</head>
+<body>
+<header>
+<nav>
+<div class="logo">Faz<span>Aí</span></div>
+<div>
+<a href="#inicio">Início</a>
+<a href="#categorias">Categorias</a>
+<a href="#profissionais">Profissionais</a>
+<a href="#conta">Minha conta</a>
+</div>
+</nav>
+</header>
+
+<div class="hero" id="inicio">
+<h1>Precisou? FazAí!</h1>
+<p>Encontre profissionais e serviços perto de você.</p>
+<div class="search">
+<input id="busca" placeholder="Qual serviço você procura?">
+<button onclick="buscar()">Buscar</button>
+</div>
+<p style="margin-top:15px;font-size:14px">📍 Governador Valadares - MG</p>
+</div>
+
+<section id="categorias">
+<h2>O que você precisa?</h2>
+<div class="categories">
+<div class="category"><span>⚡</span>Eletricistas</div>
+<div class="category"><span>🔧</span>Encanadores</div>
+<div class="category"><span>🎨</span>Pintores</div>
+<div class="category"><span>🧹</span>Diaristas</div>
+<div class="category"><span>🌱</span>Jardineiros</div>
+<div class="category"><span>🚗</span>Mecânicos</div>
+<div class="category"><span>💻</span>Informática</div>
+<div class="category"><span>🪑</span>Montadores</div>
+<div class="category"><span>🎨</span>Designers</div>
+<div class="category"><span>📚</span>Professores</div>
+<div class="category"><span>💇</span>Cabeleireiros</div>
+</div>
+</section>
+
+<section id="profissionais">
+<h2>Profissionais em destaque</h2>
+<p style="color:#65718a;margin-bottom:18px">Exemplos demonstrativos. Os profissionais reais aparecerão após a integração do sistema.</p>
+<div class="cards" id="lista">
+<div class="card" data-nome="carlos eletricista">
+<div class="avatar">⚡</div>
+<h3>Carlos Oliveira</h3>
+<p>Eletricista</p>
+<p>📍 Governador Valadares</p>
+<button onclick="abrir('Carlos Oliveira')">Ver perfil</button>
+</div>
+<div class="card" data-nome="marcos encanador">
+<div class="avatar">🔧</div>
+<h3>Marcos Santos</h3>
+<p>Encanador</p>
+<p>📍 Governador Valadares</p>
+<button onclick="abrir('Marcos Santos')">Ver perfil</button>
+</div>
+<div class="card" data-nome="ana diarista">
+<div class="avatar">🧹</div>
+<h3>Ana Souza</h3>
+<p>Diarista</p>
+<p>📍 Governador Valadares</p>
+<button onclick="abrir('Ana Souza')">Ver perfil</button>
+</div>
+</div>
+</section>
+
+<section id="conta">
+<h2>Faça parte do FazAí</h2>
+<div class="actions">
+<div class="action">
+<h3>🙋 Sou cliente</h3>
+<p>Encontre profissionais para resolver o que você precisa.</p>
+<button onclick="abrirConta('cliente')">Entrar como cliente</button>
+</div>
+<div class="action">
+<h3>🧰 Sou profissional</h3>
+<p>Apresente seus serviços e encontre novos clientes.</p>
+<button onclick="abrirConta('profissional')">Cadastrar como profissional</button>
+</div>
+<div class="action">
+<h3>🔐 Administração</h3>
+<p>Área reservada à administração do FazAí.</p>
+<button onclick="abrirConta('administrador')">Acessar administração</button>
+</div>
+</div>
+</section>
+
+<div class="modal" id="modal">
+<div class="modal-box">
+<h2 id="titulo">FazAí</h2>
+<p id="descricao">Área demonstrativa.</p>
+<input id="email" type="email" placeholder="Seu e-mail">
+<input id="senha" type="password" placeholder="Sua senha">
+<button onclick="alert('O sistema de login ainda será conectado ao Supabase.')">Continuar</button>
+<button class="close" onclick="fechar()">Fechar</button>
+</div>
+</div>
+
+<footer>
+<div class="logo">Faz<span style="color:#ffd43b">Aí</span></div>
+<p style="margin-top:10px">Conectando pessoas e profissionais.</p>
+<p style="margin-top:8px;font-size:13px">© 2026 FazAí. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+function buscar(){
+const termo=document.getElementById('busca').value.toLowerCase();
+const cards=document.querySelectorAll('.card');
+cards.forEach(card=>{
+card.style.display=card.dataset.nome.includes(termo)?'block':'none';
+});
+document.getElementById('profissionais').scrollIntoView({behavior:'smooth'});
+}
+function abrir(nome){
+document.getElementById('titulo').textContent=nome;
+document.getElementById('descricao').textContent='Este é um perfil demonstrativo. Em breve você poderá conversar e negociar diretamente com o profissional.';
+document.getElementById('modal').style.display='flex';
+}
+function abrirConta(tipo){
+document.getElementById('titulo').textContent='Acesso de '+tipo;
+document.getElementById('descricao').textContent='O cadastro e o login serão conectados ao sistema na próxima etapa.';
+document.getElementById('modal').style.display='flex';
+}
+function fechar(){
+document.getElementById('modal').style.display='none';
+}
+</script>
+</body>
+</html>
