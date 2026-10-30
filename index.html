@@ -182,5 +182,64 @@ document.getElementById('modal').style.display='none';
     SUPABASE_KEY
   );
 </script>
+  <section id="cadastro" style="max-width:420px;margin:30px auto;padding:24px;background:#fff;border-radius:16px;font-family:Arial">
+  <h2 style="color:#1769e0">Criar conta no FazAí</h2>
+
+  <form id="formCadastro">
+    <input id="nome" placeholder="Nome completo" required style="width:100%;padding:12px;margin:7px 0">
+    <input id="email" type="email" placeholder="E-mail" required style="width:100%;padding:12px;margin:7px 0">
+    <input id="senha" type="password" placeholder="Senha" required minlength="6" style="width:100%;padding:12px;margin:7px 0">
+    <input id="telefone" type="tel" placeholder="Telefone" required style="width:100%;padding:12px;margin:7px 0">
+    <input id="cidade" placeholder="Cidade" required style="width:100%;padding:12px;margin:7px 0">
+
+    <select id="tipo" required style="width:100%;padding:12px;margin:7px 0">
+      <option value="">Escolha seu tipo de conta</option>
+      <option value="client">Cliente</option>
+      <option value="professional">Profissional</option>
+    </select>
+
+    <button type="submit" style="width:100%;padding:14px;background:#1769e0;color:white;border:0;border-radius:8px;margin-top:12px">
+      Criar minha conta
+    </button>
+  </form>
+  <p id="mensagemCadastro"></p>
+</section>
+
+<script>
+document.getElementById("formCadastro").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const nome = document.getElementById("nome").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const senha = document.getElementById("senha").value;
+  const telefone = document.getElementById("telefone").value.trim();
+  const cidade = document.getElementById("cidade").value.trim();
+  const tipo = document.getElementById("tipo").value;
+  const mensagem = document.getElementById("mensagemCadastro");
+
+  mensagem.textContent = "Criando sua conta...";
+
+  try {
+    const { data, error } = await supabaseClient.auth.signUp({
+      email,
+      password: senha,
+      options: {
+        data: {
+          full_name: nome,
+          phone: telefone,
+          city: cidade,
+          role: tipo
+        }
+      }
+    });
+
+    if (error) throw error;
+
+    mensagem.textContent = "Cadastro enviado! Verifique seu e-mail para confirmar a conta.";
+  } catch (error) {
+    mensagem.textContent = "Não foi possível cadastrar: " + error.message;
+  }
+});
+</script>
 </body>
 </html>
